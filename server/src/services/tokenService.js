@@ -1,8 +1,7 @@
 import jwt from "jsonwebtoken";
+import UserDTO from "../dtos/userDto.js";
 
 class TokenService {
-  // TODO: Refresh tokens
-
   generateAccessToken(payload, expiresIn) {
     return jwt.sign(payload, process.env.JWT_ACCESS_SECRET, { expiresIn });
   }
@@ -25,6 +24,25 @@ class TokenService {
     } catch (error) {
       return null;
     }
+  }
+
+  refresh(refreshToken) {
+    const payload = this.verifyRefreshToken(refreshToken);
+
+    if (!payload) {
+      return null;
+    }
+
+    const userDto = new UserDTO(payload);
+    const userPayload = { ...userDto };
+
+    const newAccessToken = this.generateAccessToken(userPayload, "30m");
+    const newRefreshToken = this.generateRefreshToken(userPayload, "30d");
+
+    return {
+      accessToken: newAccessToken,
+      refreshToken: newRefreshToken,
+    };
   }
 }
 

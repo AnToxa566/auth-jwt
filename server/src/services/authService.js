@@ -19,7 +19,8 @@ class AuthService {
     };
   }
 
-  async login(email, password) {
+  async login(request) {
+    const { email, password } = request;
     const candidate = await User.findOne({ where: { email } });
 
     if (!candidate) {
@@ -38,7 +39,8 @@ class AuthService {
     return this.getUserData(candidate);
   }
 
-  async registration(email, password) {
+  async registration(request) {
+    const { email, password } = request;
     const candidate = await User.findOne({ where: { email } });
 
     if (candidate) {
@@ -49,6 +51,27 @@ class AuthService {
     const createdUser = await User.create({ email, password: hash });
 
     return this.getUserData(createdUser);
+  }
+
+  refresh(refreshToken) {
+    const newTokens = tokenService.refresh(refreshToken);
+
+    if (!newTokens) {
+      throw ApiException.unauthorized("User is not authorized");
+    }
+
+    const userPayload = tokenService.verifyAccessToken(newTokens.accessToken);
+
+    if (!userPayload) {
+      throw ApiException.internalServerError("Internal Server Error");
+    }
+
+    const userDto = new UserDTO(userPayload);
+
+    return {
+      user: { ...userDto },
+      ...newTokens,
+    };
   }
 }
 
