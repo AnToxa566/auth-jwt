@@ -1,17 +1,26 @@
+import { configDotenv } from "dotenv";
+
+configDotenv();
+
 import cors from "cors";
 import express from "express";
+import cookieParser from "cookie-parser";
+
+import router from "./src/routes/routes.js";
+import errorMiddleware from "./src/middlewares/errorMiddleware.js";
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+app.use("/api/v1", router);
+
+app.use(errorMiddleware);
 
 app.listen(port, () => {
-  console.log(`App listening on port ${port}`);
+  console.log(`Local: http://localhost:${port}/`);
 });
