@@ -1,13 +1,13 @@
-import Link from "../Link/Link";
+import NavLink from "../NavLink/NavLink";
 
 const Nav = () => {
   const links = [
     {
-      href: "#",
+      to: "/singup",
       title: "SingUp",
     },
     {
-      href: "#",
+      to: "/logIn",
       title: "LogIn",
     },
   ];
@@ -15,7 +15,7 @@ const Nav = () => {
   return (
     <nav className="flex gap-4">
       {links.map((link) => (
-        <Link key={link.title} href={link.href} title={link.title} />
+        <NavLink key={link.title} to={link.to} title={link.title} />
       ))}
     </nav>
   );

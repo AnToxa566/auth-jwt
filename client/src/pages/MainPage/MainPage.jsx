@@ -1,6 +1,6 @@
-import Button from "../Button/Button";
+import Button from "../../components/Button/Button";
 
-const Main = () => {
+const MainPage = () => {
   return (
     <div className="mx-auto flex h-screen flex-col items-center justify-center text-center xl:max-w-[80%] 2xl:max-w-[70%]">
       <h1 className="mb-16 text-5xl font-bold md:text-7xl">
@@ -25,4 +25,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default MainPage;
