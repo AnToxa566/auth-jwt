@@ -36,7 +36,14 @@ class AuthService {
       throw ApiException.badRequest("Invalid password");
     }
 
-    return this.getUserData(candidate);
+    const userData = this.getUserData(candidate);
+
+    await tokenService.updateRefreshToken(
+      userData.refreshToken,
+      userData.user.id
+    );
+
+    return userData;
   }
 
   async registration(request) {
@@ -50,23 +57,30 @@ class AuthService {
     const hash = await bcrypt.hash(password, 5);
     const createdUser = await User.create({ email, password: hash });
 
-    return this.getUserData(createdUser);
+    const userData = this.getUserData(createdUser);
+
+    await tokenService.storeRefreshToken(
+      userData.refreshToken,
+      userData.user.id
+    );
+
+    return userData;
   }
 
-  refresh(refreshToken) {
-    const newTokens = tokenService.refresh(refreshToken);
+  async refresh(refreshToken) {
+    const newTokens = await tokenService.refresh(refreshToken);
 
     if (!newTokens) {
       throw ApiException.unauthorized("User is not authorized");
     }
 
     const userPayload = tokenService.verifyAccessToken(newTokens.accessToken);
-
-    if (!userPayload) {
-      throw ApiException.internalServerError("Internal Server Error");
-    }
-
     const userDto = new UserDTO(userPayload);
+
+    await tokenService.updateRefreshToken(
+      newTokens.refreshToken,
+      userPayload.id
+    );
 
     return {
       user: { ...userDto },

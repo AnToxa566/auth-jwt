@@ -2,6 +2,7 @@ import { Sequelize } from "sequelize";
 import { configDotenv } from "dotenv";
 
 import user from "./models/user.js";
+import refreshToken from "./models/refreshToken.js";
 
 configDotenv();
 
@@ -16,4 +17,10 @@ export const sequelize = new Sequelize(
   }
 );
 
-export const User = sequelize.define("User", user);
+const User = sequelize.define("user", user);
+const RefreshToken = sequelize.define("refreshToken", refreshToken);
+
+RefreshToken.belongsTo(User);
+User.hasOne(RefreshToken);
+
+export { User, RefreshToken };
