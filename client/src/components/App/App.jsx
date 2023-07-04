@@ -9,6 +9,12 @@ const App = () => {
         <Header />
         <Main />
       </Container>
+
+      <img
+        className="absolute bottom-0 right-0"
+        src="src/assets/images/bg-lg-image.png"
+        alt=""
+      />
     </>
   );
 };

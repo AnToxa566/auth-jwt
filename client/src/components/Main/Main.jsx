@@ -15,6 +15,12 @@ const Main = () => {
         <Button title="Source on GitHub" />
         <Button title="Get Users →" outline />
       </div>
+
+      <img
+        className="invisible absolute left-[25%] top-[25%] lg:visible"
+        src="src/assets/images/bg-sm-image.png"
+        alt=""
+      />
     </div>
   );
 };
