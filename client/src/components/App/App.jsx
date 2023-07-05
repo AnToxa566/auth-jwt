@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 
+import Notification from "../Notification/Notification";
 import Container from "../Container/Container";
 import Header from "../Header/Header";
 
@@ -20,8 +21,10 @@ const App = () => {
         </Routes>
       </Container>
 
+      <Notification className="fixed bottom-10 right-10" />
+
       <img
-        className="absolute bottom-0 right-0"
+        className="absolute bottom-0 right-0 -z-10"
         src="src/assets/images/bg-lg-image.png"
         alt=""
       />
