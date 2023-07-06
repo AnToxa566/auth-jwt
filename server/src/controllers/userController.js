@@ -7,7 +7,9 @@ class UserController {
       const users = await userService.getAll();
       const usersDTO = users.map((user) => ({ ...new UserDTO(user) }));
 
-      return res.json(usersDTO);
+      return res.json({
+        users: usersDTO,
+      });
     } catch (err) {
       next(err);
     }

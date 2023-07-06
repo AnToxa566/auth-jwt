@@ -1,19 +1,47 @@
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+
+import { StoreContext } from "../../context/storeContext";
 
 import Input from "../Input/Input";
 import Button from "../Button/Button";
 
 const LoginForm = () => {
+  const { authStore } = useContext(StoreContext);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    await authStore.login({ email, password });
+  };
+
   return (
     <>
-      <form className="space-y-6" action="#" method="POST">
-        <Input type="email" name="email" label="Email address" required />
-        <Input type="password" name="password" label="Password" required />
+      <form className="space-y-6" onSubmit={handleSubmit}>
+        <Input
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          type="email"
+          name="email"
+          label="Email address"
+          required
+        />
+        <Input
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          type="password"
+          name="password"
+          label="Password"
+          required
+        />
 
         <Button type="submit" title="Log in" className="w-full" />
       </form>
 
-      <p className="mt-10 flex items-center justify-between text-center text-sm text-gray-500">
+      <div className="mt-10 flex items-center justify-between text-center text-sm text-gray-500">
         <p className="mr-2">Not a member?</p>
 
         <Link
@@ -22,7 +50,7 @@ const LoginForm = () => {
         >
           Sing up a new account
         </Link>
-      </p>
+      </div>
     </>
   );
 };

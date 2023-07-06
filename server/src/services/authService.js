@@ -24,7 +24,7 @@ class AuthService {
     const candidate = await User.findOne({ where: { email } });
 
     if (!candidate) {
-      throw ApiException.badRequest("Invalid email");
+      throw ApiException.badRequest("User with this email was not found");
     }
 
     const isCorrectPassword = await bcrypt.compare(

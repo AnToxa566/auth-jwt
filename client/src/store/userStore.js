@@ -5,9 +5,6 @@ class UserStore {
   users = [];
   isLoading = false;
 
-  statusCode = 0;
-  error = {};
-
   constructor() {
     makeAutoObservable(this);
   }
@@ -19,8 +16,7 @@ class UserStore {
       const response = await axios.get("/users");
       console.log(response);
     } catch (error) {
-      this.statusCode = error.response.status;
-      this.error = error;
+      console.log(error);
     } finally {
       this.isLoading = false;
     }

@@ -13,7 +13,7 @@ const SignupForm = () => {
         <Button type="submit" title="Sign up" className="w-full" />
       </form>
 
-      <p className="mt-10 flex items-center justify-between text-center text-sm text-gray-500">
+      <div className="mt-10 flex items-center justify-between text-center text-sm text-gray-500">
         <p className="mr-2">Already signed up?</p>
 
         <Link
@@ -22,7 +22,7 @@ const SignupForm = () => {
         >
           Log in to your account
         </Link>
-      </p>
+      </div>
     </>
   );
 };

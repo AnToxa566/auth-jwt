@@ -31,6 +31,15 @@ class NotificationStore {
   setNotificationMessage(message) {
     this.message = message;
   }
+
+  showErrorNotification(title = "Error", message = "Something went wrong") {
+    this.isError = true;
+
+    this.title = title;
+    this.message = message;
+
+    this.showNotification();
+  }
 }
 
 const notificationStore = new NotificationStore();

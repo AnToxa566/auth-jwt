@@ -4,23 +4,10 @@ import { useContext } from "react";
 import { StoreContext } from "../../context/storeContext";
 
 const MainPage = () => {
-  const { userStore, notificationStore } = useContext(StoreContext);
+  const { userStore } = useContext(StoreContext);
 
   const fetchUsers = async () => {
     await userStore.fetchUsers();
-
-    if (userStore.statusCode >= 400) {
-      notificationStore.setIsError(true);
-
-      notificationStore.setNotificationTitle(
-        userStore.error.response.statusText
-      );
-      notificationStore.setNotificationMessage(
-        userStore.error.response.data.message
-      );
-
-      notificationStore.showNotification();
-    }
   };
 
   return (

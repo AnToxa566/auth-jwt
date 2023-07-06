@@ -1,24 +1,40 @@
-import NavLink from "../NavLink/NavLink";
+import { useContext } from "react";
+import { observer } from "mobx-react-lite";
 
-const Nav = () => {
+import NavLink from "../NavLink/NavLink";
+import { StoreContext } from "../../context/storeContext";
+
+const Nav = observer(() => {
+  const { authStore } = useContext(StoreContext);
+
   const links = [
     {
       to: "/singup",
       title: "SingUp",
+      auth: false,
     },
     {
-      to: "/logIn",
+      to: "/login",
       title: "LogIn",
+      auth: false,
+    },
+    {
+      to: "/logout",
+      title: "Logout",
+      auth: true,
     },
   ];
 
   return (
     <nav className="flex gap-4">
-      {links.map((link) => (
-        <NavLink key={link.title} to={link.to} title={link.title} />
-      ))}
+      {links.map(
+        (link) =>
+          link.auth === authStore.isAuth && (
+            <NavLink key={link.title} to={link.to} title={link.title} />
+          )
+      )}
     </nav>
   );
-};
+});
 
 export default Nav;
