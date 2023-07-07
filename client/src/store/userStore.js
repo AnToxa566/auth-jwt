@@ -14,7 +14,7 @@ class UserStore {
 
     try {
       const response = await axios.get("/users");
-      console.log(response);
+      this.users = response.data.users;
     } catch (error) {
       console.log(error);
     } finally {
