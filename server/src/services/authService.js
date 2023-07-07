@@ -5,7 +5,7 @@ import tokenService from "./tokenService.js";
 import ApiException from "../exceptions/apiException.js";
 
 class AuthService {
-  getUserData(user) {
+  generateUserData(user) {
     const userDto = new UserDTO(user);
     const userPayload = { ...userDto };
 
@@ -36,7 +36,7 @@ class AuthService {
       throw ApiException.badRequest("Invalid password");
     }
 
-    const userData = this.getUserData(candidate);
+    const userData = this.generateUserData(candidate);
 
     await tokenService.storeRefreshToken(
       userData.refreshToken,
@@ -57,7 +57,7 @@ class AuthService {
     const hash = await bcrypt.hash(password, 5);
     const createdUser = await User.create({ email, password: hash });
 
-    const userData = this.getUserData(createdUser);
+    const userData = this.generateUserData(createdUser);
 
     await tokenService.storeRefreshToken(
       userData.refreshToken,

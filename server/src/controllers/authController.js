@@ -1,4 +1,5 @@
 import { validationResult } from "express-validator";
+import UserDTO from "../dtos/userDto.js";
 import authService from "../services/authService.js";
 import ApiException from "../exceptions/apiException.js";
 
@@ -57,6 +58,16 @@ class AuthController {
       AuthController.deleteRefreshTokenFromCookie(res);
 
       return res.json();
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  async check(req, res, next) {
+    try {
+      return res.json({
+        user: { ...new UserDTO(req.user) },
+      });
     } catch (err) {
       next(err);
     }

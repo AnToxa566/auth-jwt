@@ -7,6 +7,8 @@ const router = new Router();
 
 router.get("/refresh", authController.refresh);
 
+router.get("/check", authMiddleware, authController.check);
+
 router.get("/logout", authMiddleware, authController.logout);
 
 router.post("/login", authValidation, authController.login);
