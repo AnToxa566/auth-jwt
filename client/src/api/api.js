@@ -9,22 +9,6 @@ const $axios = axios.create({
   },
 });
 
-$axios.interceptors.request.use(
-  (config) => {
-    // Выполняется перед отправкой запроса
-    // Можно модифицировать конфигурацию или добавить заголовки
-    return config;
-  },
-  (error) => {
-    notificationStore.showErrorNotification(
-      error.response.statusText,
-      error.response.data.message
-    );
-
-    return Promise.reject(error);
-  }
-);
-
 $axios.interceptors.response.use(
   (response) => {
     // Выполняется при получении успешного ответа

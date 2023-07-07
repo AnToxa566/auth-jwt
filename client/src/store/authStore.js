@@ -4,9 +4,24 @@ import axios from "../api/api.js";
 class AuthStore {
   user = {};
   isAuth = false;
+  isAuthChecked = false;
 
   constructor() {
     makeAutoObservable(this);
+  }
+
+  async checkAuth() {
+    try {
+      this.isAuthChecked = false;
+      const response = await axios.get("/auth/check");
+
+      this.user = response.data.user;
+      this.isAuth = true;
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.isAuthChecked = true;
+    }
   }
 
   async login(request) {
@@ -14,8 +29,6 @@ class AuthStore {
       const response = await axios.post("/auth/login", request);
 
       localStorage.setItem("token", response.data.accessToken);
-
-      console.log(response.data);
 
       this.user = response.data.user;
       this.isAuth = true;

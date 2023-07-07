@@ -26,7 +26,7 @@ const Nav = observer(() => {
 
   const buttons = [
     {
-      component: <LogoutButton />,
+      component: <LogoutButton key="1" />,
       auth: true,
     },
   ];
