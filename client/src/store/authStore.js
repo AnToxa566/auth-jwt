@@ -15,8 +15,23 @@ class AuthStore {
 
       localStorage.setItem("token", response.data.accessToken);
 
+      console.log(response.data);
+
       this.user = response.data.user;
       this.isAuth = true;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async logout() {
+    try {
+      await axios.get("/auth/logout");
+
+      localStorage.setItem("token", "");
+
+      this.user = {};
+      this.isAuth = false;
     } catch (error) {
       console.log(error);
     }

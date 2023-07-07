@@ -1,38 +1,47 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 
-import NavLink from "../NavLink/NavLink";
+import Button from "../Button/Button";
+import LogoutButton from "../LogoutButton/LogoutButton";
 import { StoreContext } from "../../context/storeContext";
 
 const Nav = observer(() => {
   const { authStore } = useContext(StoreContext);
 
-  const links = [
-    {
-      to: "/singup",
-      title: "SingUp",
-      auth: false,
-    },
+  const linkButtons = [
     {
       to: "/login",
       title: "LogIn",
+      outline: true,
       auth: false,
     },
     {
-      to: "/logout",
-      title: "Logout",
+      to: "/singup",
+      title: "SingUp",
+      outline: false,
+      auth: false,
+    },
+  ];
+
+  const buttons = [
+    {
+      component: <LogoutButton />,
       auth: true,
     },
   ];
 
   return (
     <nav className="flex gap-4">
-      {links.map(
+      {linkButtons.map(
         (link) =>
           link.auth === authStore.isAuth && (
-            <NavLink key={link.title} to={link.to} title={link.title} />
+            <Link key={link.title} to={link.to}>
+              <Button title={link.title} outline={link.outline} small />
+            </Link>
           )
       )}
+      {buttons.map((btn) => btn.auth === authStore.isAuth && btn.component)}
     </nav>
   );
 });
