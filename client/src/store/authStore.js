@@ -55,6 +55,17 @@ class AuthStore {
     }
   }
 
+  async registration(request) {
+    try {
+      const response = await axios.post("/auth/registration", request);
+      this.setAuthUser(response);
+
+      return true;
+    } catch (error) {
+      return null;
+    }
+  }
+
   async logout() {
     try {
       await axios.get("/auth/logout");

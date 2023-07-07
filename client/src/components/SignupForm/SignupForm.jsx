@@ -1,14 +1,42 @@
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+
+import { StoreContext } from "../../context/storeContext";
 
 import Input from "../Input/Input";
 import Button from "../Button/Button";
 
 const SignupForm = () => {
+  const { authStore } = useContext(StoreContext);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    await authStore.registration({ email, password });
+  };
+
   return (
     <>
-      <form className="space-y-6" action="#" method="POST">
-        <Input type="email" name="email" label="Email address" required />
-        <Input type="password" name="password" label="Password" required />
+      <form className="space-y-6" onSubmit={handleSubmit}>
+        <Input
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          type="email"
+          name="email"
+          label="Email address"
+          required
+        />
+        <Input
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          type="password"
+          name="password"
+          label="Password"
+          required
+        />
 
         <Button type="submit" title="Sign up" className="w-full" />
       </form>
