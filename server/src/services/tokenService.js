@@ -67,24 +67,35 @@ class TokenService {
     return updatedRefreshToken;
   }
 
+  async deleteRefreshTokens(userId) {
+    const isDestroyed = await RefreshToken.destroy({ where: { userId } });
+
+    if (!isDestroyed) {
+      throw ApiException.unauthorized("User is not authorized");
+    }
+
+    return true;
+  }
+
   async refresh(refreshToken) {
     const candidate = await RefreshToken.findOne({ where: { refreshToken } });
 
     if (!candidate) {
-      return null;
+      throw ApiException.unauthorized("User is not authorized");
     }
 
     const payload = this.verifyRefreshToken(refreshToken);
 
     if (!payload) {
-      return null;
+      throw ApiException.unauthorized("User is not authorized");
     }
 
-    const userDto = new UserDTO(payload);
-    const userPayload = { ...userDto };
+    const userPayload = { ...new UserDTO(payload) };
 
     const newAccessToken = this.generateAccessToken(userPayload, "30m");
     const newRefreshToken = this.generateRefreshToken(userPayload, "30d");
+
+    await this.updateRefreshToken(newRefreshToken, userPayload.id);
 
     return {
       accessToken: newAccessToken,

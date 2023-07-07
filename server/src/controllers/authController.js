@@ -18,6 +18,10 @@ class AuthController {
     });
   }
 
+  static deleteRefreshTokenFromCookie(res) {
+    res.cookie("refreshToken", "", { expires: new Date(0) });
+  }
+
   async login(req, res, next) {
     try {
       AuthController.validationRequest(req);
@@ -41,6 +45,18 @@ class AuthController {
       AuthController.setRefreshTokenInCookie(res, userData.refreshToken);
 
       return res.json(userData);
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  async logout(req, res, next) {
+    try {
+      await authService.logout(req.user.id);
+
+      AuthController.deleteRefreshTokenFromCookie(res);
+
+      return res.json();
     } catch (err) {
       next(err);
     }

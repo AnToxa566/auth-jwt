@@ -38,7 +38,7 @@ class AuthService {
 
     const userData = this.getUserData(candidate);
 
-    await tokenService.updateRefreshToken(
+    await tokenService.storeRefreshToken(
       userData.refreshToken,
       userData.user.id
     );
@@ -67,20 +67,17 @@ class AuthService {
     return userData;
   }
 
+  async logout(userId) {
+    await tokenService.deleteRefreshTokens(userId);
+
+    return true;
+  }
+
   async refresh(refreshToken) {
     const newTokens = await tokenService.refresh(refreshToken);
 
-    if (!newTokens) {
-      throw ApiException.unauthorized("User is not authorized");
-    }
-
     const userPayload = tokenService.verifyAccessToken(newTokens.accessToken);
     const userDto = new UserDTO(userPayload);
-
-    await tokenService.updateRefreshToken(
-      newTokens.refreshToken,
-      userPayload.id
-    );
 
     return {
       user: { ...userDto },
