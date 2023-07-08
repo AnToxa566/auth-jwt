@@ -1,10 +1,10 @@
 import { useContext } from "react";
 
-import Button from "../../components/Button/Button";
-import UserList from "../../components/UserList/UserList";
-import ArrowDownIcon from "../../components/Icons/ArrowDownIcon/ArrowDownIcon";
+import Button from "@cmp/common/ui/Button/Button";
+import UserList from "@cmp/user/UserList/UserList";
+import { ArrowDownIcon } from "@cmp/common/icons/icons";
 
-import { StoreContext } from "../../context/storeContext";
+import { StoreContext } from "@/context/storeContext";
 
 const MainPage = () => {
   const { userStore } = useContext(StoreContext);

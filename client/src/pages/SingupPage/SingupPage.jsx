@@ -2,10 +2,10 @@ import { useContext } from "react";
 import { observer } from "mobx-react-lite";
 import { Navigate } from "react-router-dom";
 
-import SignupForm from "../../components/SignupForm/SignupForm";
-import FormModal from "../../components/FormModal/FormModal";
+import SignupForm from "@cmp/common/forms/SignupForm/SignupForm";
+import FormModal from "@cmp/common/modals/FormModal/FormModal";
 
-import { StoreContext } from "../../context/storeContext";
+import { StoreContext } from "@/context/storeContext";
 
 const SingupPage = observer(() => {
   const { authStore } = useContext(StoreContext);

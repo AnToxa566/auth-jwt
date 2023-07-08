@@ -1,6 +1,6 @@
-import authStore from "./authStore.js";
-import userStore from "./userStore.js";
-import notificationStore from "./notificationStore.js";
+import authStore from "./stores/authStore.js";
+import userStore from "./stores/userStore.js";
+import notificationStore from "./stores/notificationStore.js";
 
 export default {
   authStore,
