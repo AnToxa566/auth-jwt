@@ -2,7 +2,7 @@ const BUTTON_TITLES = {
   LOGIN: "Log In",
   SINGUP: "Sing up",
   LOGOUT: "Log out",
-  SOURCE: "Source on GitHub",
+  GITHUB_SOURCE: "Source on GitHub",
   GET_USERS: "Get Users →",
 };
 

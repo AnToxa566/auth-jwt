@@ -4,7 +4,7 @@ import Button from "@cmp/common/ui/Button/Button";
 import UserList from "@cmp/user/UserList/UserList";
 import { ArrowDownIcon } from "@cmp/common/icons/icons";
 
-import { BUTTON_TITLES } from "@/constants";
+import { BUTTON_TITLES, EXTERNAL_LINKS } from "@/constants";
 import { StoreContext } from "@/context/storeContext";
 
 const MainPage = () => {
@@ -27,11 +27,11 @@ const MainPage = () => {
 
         <div className="flex flex-col-reverse gap-4 sm:flex-row">
           <a
-            href="https://github.com/AnToxa566/auth-jwt"
+            href={EXTERNAL_LINKS.GITHUB_SOURCE}
             target="_blank"
             rel="noreferrer"
           >
-            <Button title={BUTTON_TITLES.SOURCE} />
+            <Button title={BUTTON_TITLES.GITHUB_SOURCE} />
           </a>
 
           <Button
