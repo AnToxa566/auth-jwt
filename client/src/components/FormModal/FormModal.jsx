@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 
 import Modal from "../Modal/Modal";
-import Logo from "../Logo/Logo";
+import Logo from "../HeaderLogo/HeaderLogo";
 
 const FormModal = ({ title, formElement }) => {
   return (

@@ -1,14 +1,16 @@
-import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import logo from "../../assets/icons/logo.svg";
 
-const Logo = () => {
-  return (
-    <div>
-      <Link to="/">
-        <img src={logo} alt="" />
-      </Link>
-    </div>
-  );
+const Logo = ({ className }) => {
+  return <img src={logo} alt="" className={`${className}`} />;
+};
+
+Logo.propTypes = {
+  className: PropTypes.string,
+};
+
+Logo.defaultProps = {
+  className: "",
 };
 
 export default Logo;
