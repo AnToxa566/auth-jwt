@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 
-import { APP_ROTES } from "@/constants";
+import { APP_ROTES, BUTTON_TITLES } from "@/constants";
 import { StoreContext } from "@/context/storeContext";
 
 import Input from "@cmp/common/ui/Input/Input";
@@ -39,7 +39,7 @@ const LoginForm = () => {
           required
         />
 
-        <Button type="submit" title="Log in" className="w-full" />
+        <Button type="submit" title={BUTTON_TITLES.LOGIN} className="w-full" />
       </form>
 
       <div className="mt-10 flex items-center justify-between text-center text-sm text-gray-500">

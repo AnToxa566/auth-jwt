@@ -4,6 +4,7 @@ import Button from "@cmp/common/ui/Button/Button";
 import UserList from "@cmp/user/UserList/UserList";
 import { ArrowDownIcon } from "@cmp/common/icons/icons";
 
+import { BUTTON_TITLES } from "@/constants";
 import { StoreContext } from "@/context/storeContext";
 
 const MainPage = () => {
@@ -30,10 +31,14 @@ const MainPage = () => {
             target="_blank"
             rel="noreferrer"
           >
-            <Button title="Source on GitHub" />
+            <Button title={BUTTON_TITLES.SOURCE} />
           </a>
 
-          <Button title="Get Users →" clickHandler={fetchUsers} outline />
+          <Button
+            title={BUTTON_TITLES.GET_USERS}
+            clickHandler={fetchUsers}
+            outline
+          />
         </div>
 
         <div className="mt-16 animate-bounce">
