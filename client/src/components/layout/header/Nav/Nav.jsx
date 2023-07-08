@@ -4,6 +4,8 @@ import { observer } from "mobx-react-lite";
 
 import Button from "@cmp/common/ui/Button/Button";
 import LogoutButton from "../LogoutButton/LogoutButton";
+
+import { APP_ROTES } from "@/constants";
 import { StoreContext } from "@/context/storeContext";
 
 const Nav = observer(() => {
@@ -11,13 +13,13 @@ const Nav = observer(() => {
 
   const linkButtons = [
     {
-      to: "/login",
+      to: APP_ROTES.LOGIN,
       title: "LogIn",
       outline: true,
       auth: false,
     },
     {
-      to: "/singup",
+      to: APP_ROTES.SINGUP,
       title: "SingUp",
       outline: false,
       auth: false,

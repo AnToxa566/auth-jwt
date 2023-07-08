@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 
+import { APP_ROTES } from "@/constants";
 import { StoreContext } from "@/context/storeContext";
 
 import Input from "@cmp/common/ui/Input/Input";
@@ -45,7 +46,7 @@ const SignupForm = () => {
         <p className="mr-2">Already signed up?</p>
 
         <Link
-          to="/login"
+          to={APP_ROTES.LOGIN}
           className="font-semibold leading-6 text-blue-700 hover:text-blue-500"
         >
           Log in to your account

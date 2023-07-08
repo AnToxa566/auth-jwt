@@ -5,13 +5,14 @@ import { Navigate } from "react-router-dom";
 import SignupForm from "@cmp/common/forms/SignupForm/SignupForm";
 import FormModal from "@cmp/common/modals/FormModal/FormModal";
 
+import { APP_ROTES } from "@/constants";
 import { StoreContext } from "@/context/storeContext";
 
 const SingupPage = observer(() => {
   const { authStore } = useContext(StoreContext);
 
   return authStore.isAuth ? (
-    <Navigate to="/" replace={true} />
+    <Navigate to={APP_ROTES.HOME} replace={true} />
   ) : (
     <FormModal title="Sign up a new account" formElement={<SignupForm />} />
   );

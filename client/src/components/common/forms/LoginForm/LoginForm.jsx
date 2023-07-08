@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 
+import { APP_ROTES } from "@/constants";
 import { StoreContext } from "@/context/storeContext";
 
 import Input from "@cmp/common/ui/Input/Input";
@@ -45,7 +46,7 @@ const LoginForm = () => {
         <p className="mr-2">Not a member?</p>
 
         <Link
-          to="/singup"
+          to={APP_ROTES.SINGUP}
           className="font-semibold leading-6 text-blue-700 hover:text-blue-500"
         >
           Sing up a new account

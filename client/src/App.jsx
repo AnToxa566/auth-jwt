@@ -12,6 +12,7 @@ import LoginPage from "@pages/LoginPage/LoginPage";
 import SingupPage from "@pages/SingupPage/SingupPage";
 
 import { StoreContext } from "@/context/storeContext";
+import { APP_ROTES } from "@/constants";
 
 const App = observer(() => {
   const { authStore } = useContext(StoreContext);
@@ -39,9 +40,9 @@ const App = observer(() => {
             <Header />
 
             <Routes>
-              <Route path="/" element={<MainPage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/singup" element={<SingupPage />} />
+              <Route path={APP_ROTES.HOME} element={<MainPage />} />
+              <Route path={APP_ROTES.LOGIN} element={<LoginPage />} />
+              <Route path={APP_ROTES.SINGUP} element={<SingupPage />} />
             </Routes>
           </Container>
 
