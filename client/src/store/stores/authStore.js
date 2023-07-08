@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx";
 
 import axios from "@services/api/api.js";
-import { API_AUTH_ROUTES } from "@/constants";
+import { API_AUTH_ROUTES, LOCAL_STORAGE_KEYS } from "@/constants";
 
 class AuthStore {
   user = {};
@@ -13,7 +13,7 @@ class AuthStore {
   }
 
   setAuthUser(res) {
-    localStorage.setItem("token", res.data.accessToken);
+    localStorage.setItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN, res.data.accessToken);
 
     this.user = res.data.user;
     this.isAuth = true;
@@ -72,7 +72,7 @@ class AuthStore {
     try {
       await axios.get(API_AUTH_ROUTES.LOGOUT);
 
-      localStorage.setItem("token", "");
+      localStorage.setItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN, "");
 
       this.user = {};
       this.isAuth = false;

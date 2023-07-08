@@ -1,5 +1,6 @@
 import axios from "axios";
 
+import { LOCAL_STORAGE_KEYS } from "@/constants";
 import authStore from "@store/stores/authStore.js";
 import notificationStore from "@store/stores/notificationStore.js";
 
@@ -8,12 +9,14 @@ const $axios = axios.create({
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${localStorage.getItem("token")}`,
+    Authorization: `Bearer ${localStorage.getItem(
+      LOCAL_STORAGE_KEYS.ACCESS_TOKEN
+    )}`,
   },
 });
 
 $axios.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN);
 
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
@@ -33,7 +36,9 @@ $axios.interceptors.response.use(
       const isRefreshed = await authStore.refresh();
 
       if (isRefreshed) {
-        const authHeader = `Bearer ${localStorage.getItem("token")}`;
+        const authHeader = `Bearer ${localStorage.getItem(
+          LOCAL_STORAGE_KEYS.ACCESS_TOKEN
+        )}`;
 
         $axios.defaults.headers.common["Authorization"] = authHeader;
         error.config.headers.Authorization = authHeader;
