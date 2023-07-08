@@ -20,18 +20,6 @@ class NotificationStore {
     setTimeout(() => (this.style = "hidden"), 500);
   }
 
-  setIsError(value) {
-    this.isError = value;
-  }
-
-  setNotificationTitle(title) {
-    this.title = title;
-  }
-
-  setNotificationMessage(message) {
-    this.message = message;
-  }
-
   showErrorNotification(title = "Error", message = "Something went wrong") {
     this.isError = true;
 

@@ -19,6 +19,13 @@ class AuthStore {
     this.isAuth = true;
   }
 
+  removeUser() {
+    localStorage.setItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN, "");
+
+    this.user = {};
+    this.isAuth = false;
+  }
+
   async checkAuth() {
     try {
       this.isAuthChecked = false;
@@ -71,11 +78,7 @@ class AuthStore {
   async logout() {
     try {
       await axios.get(API_AUTH_ROUTES.LOGOUT);
-
-      localStorage.setItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN, "");
-
-      this.user = {};
-      this.isAuth = false;
+      this.removeUser();
 
       return true;
     } catch (error) {
