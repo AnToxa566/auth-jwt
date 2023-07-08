@@ -29,6 +29,7 @@ $axios.interceptors.request.use((config) => {
 
 $axios.interceptors.response.use(
   (response) => {
+    notificationStore.hiddenNotification();
     return response;
   },
   async (error) => {

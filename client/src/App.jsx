@@ -15,12 +15,16 @@ import { StoreContext } from "@/context/storeContext";
 import { APP_ROTES } from "@/constants";
 
 const App = observer(() => {
-  const { authStore } = useContext(StoreContext);
+  const { authStore, notificationStore } = useContext(StoreContext);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const checkAuth = async () => {
-      await authStore.checkAuth();
+      const isAuthed = await authStore.checkAuth();
+
+      if (!isAuthed) {
+        notificationStore.hiddenNotification();
+      }
 
       setTimeout(() => {
         setIsLoading(false);
@@ -28,7 +32,7 @@ const App = observer(() => {
     };
 
     checkAuth();
-  }, [authStore]);
+  }, [authStore, notificationStore]);
 
   return (
     <>
