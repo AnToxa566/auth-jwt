@@ -27,7 +27,7 @@ const App = observer(() => {
     };
 
     checkAuth();
-  }, []);
+  }, [authStore]);
 
   return (
     <>

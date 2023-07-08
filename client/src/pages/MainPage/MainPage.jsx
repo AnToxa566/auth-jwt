@@ -25,7 +25,14 @@ const MainPage = () => {
         </p>
 
         <div className="flex flex-col-reverse gap-4 sm:flex-row">
-          <Button title="Source on GitHub" />
+          <a
+            href="https://github.com/AnToxa566/auth-jwt"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Button title="Source on GitHub" />
+          </a>
+
           <Button title="Get Users →" clickHandler={fetchUsers} outline />
         </div>
 
