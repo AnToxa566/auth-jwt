@@ -1,11 +1,11 @@
 import { useState, useContext } from "react";
-import { Link } from "react-router-dom";
 
 import { APP_ROTES, BUTTON_TITLES } from "@/constants";
 import { StoreContext } from "@/context/storeContext";
 
 import Input from "@cmp/common/ui/Input/Input";
 import Button from "@cmp/common/ui/Button/Button";
+import FormFooter from "@cmp/common/forms/FormFooter/FormFooter";
 
 const LoginForm = () => {
   const { authStore } = useContext(StoreContext);
@@ -42,16 +42,11 @@ const LoginForm = () => {
         <Button type="submit" title={BUTTON_TITLES.LOGIN} className="w-full" />
       </form>
 
-      <div className="mt-10 flex items-center justify-between text-center text-sm text-gray-500">
-        <p className="mr-2">Not a member?</p>
-
-        <Link
-          to={APP_ROTES.SINGUP}
-          className="font-semibold leading-6 text-blue-700 hover:text-blue-500"
-        >
-          Sing up a new account
-        </Link>
-      </div>
+      <FormFooter
+        question="Not a member?"
+        linkTitle="Sing up a new account"
+        to={APP_ROTES.SINGUP}
+      />
     </>
   );
 };

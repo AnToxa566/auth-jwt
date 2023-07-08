@@ -1,11 +1,11 @@
 import { useState, useContext } from "react";
-import { Link } from "react-router-dom";
 
 import { APP_ROTES, BUTTON_TITLES } from "@/constants";
 import { StoreContext } from "@/context/storeContext";
 
 import Input from "@cmp/common/ui/Input/Input";
 import Button from "@cmp/common/ui/Button/Button";
+import FormFooter from "@cmp/common/forms/FormFooter/FormFooter";
 
 const SignupForm = () => {
   const { authStore } = useContext(StoreContext);
@@ -42,16 +42,11 @@ const SignupForm = () => {
         <Button type="submit" title={BUTTON_TITLES.SINGUP} className="w-full" />
       </form>
 
-      <div className="mt-10 flex items-center justify-between text-center text-sm text-gray-500">
-        <p className="mr-2">Already signed up?</p>
-
-        <Link
-          to={APP_ROTES.LOGIN}
-          className="font-semibold leading-6 text-blue-700 hover:text-blue-500"
-        >
-          Log in to your account
-        </Link>
-      </div>
+      <FormFooter
+        question="Already signed up?"
+        linkTitle="Log in to your account"
+        to={APP_ROTES.LOGIN}
+      />
     </>
   );
 };
