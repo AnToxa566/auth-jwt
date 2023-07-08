@@ -10,7 +10,7 @@ const UserList = observer(({ className }) => {
 
   return (
     <div
-      className={`${className} w-fit rounded border-2 border-blue-700 px-4 py-6 text-center`}
+      className={`${className} w-fit rounded border-2 border-blue-700 px-4 py-6`}
     >
       {userStore.users.length ? (
         <div className="flex flex-col gap-6">
@@ -19,7 +19,9 @@ const UserList = observer(({ className }) => {
           ))}
         </div>
       ) : (
-        <div className="text-blue-700">User list is currently empty</div>
+        <div className="text-center font-medium text-blue-700">
+          User list is currently empty
+        </div>
       )}
     </div>
   );
