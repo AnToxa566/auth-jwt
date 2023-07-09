@@ -5,7 +5,7 @@
   "type": "module",
   "main": "app.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node app.js",
     "dev": "nodemon --watch src app.js",
     "db:sync": "node ./src/db/sync.js"
   },
