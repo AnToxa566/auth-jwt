@@ -23,4 +23,15 @@ const RefreshToken = sequelize.define("refreshToken", refreshToken);
 RefreshToken.belongsTo(User);
 User.hasOne(RefreshToken);
 
+(async () => {
+  await sequelize
+    .sync({ force: true })
+    .then(() => {
+      console.log("Database and tables created successfully");
+    })
+    .catch((error) => {
+      console.error("Unable to connect to the database:", error);
+    });
+})();
+
 export { User, RefreshToken };
