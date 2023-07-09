@@ -1,4 +1,3 @@
-import { Client } from "pg";
 import { Sequelize } from "sequelize";
 import { configDotenv } from "dotenv";
 
@@ -15,7 +14,6 @@ export const sequelize = new Sequelize(
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     dialect: "postgres",
-    dialectModule: Client,
   }
 );
 
