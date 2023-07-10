@@ -32,7 +32,7 @@ const RefreshToken = sequelize.define("refreshToken", refreshToken);
 RefreshToken.belongsTo(User);
 User.hasOne(RefreshToken);
 
-(async () => {
+const configDB = async () => {
   await sequelize
     .sync({ force: true })
     .then(() => {
@@ -41,6 +41,6 @@ User.hasOne(RefreshToken);
     .catch((error) => {
       console.error("Unable to connect to the database:", error);
     });
-})();
+};
 
-export { User, RefreshToken };
+export { User, RefreshToken, configDB };

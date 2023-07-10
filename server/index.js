@@ -1,5 +1,7 @@
+import { configDB } from "./src/db/index.js";
 import { configDotenv } from "dotenv";
 
+configDB();
 configDotenv();
 
 import cors from "cors";
