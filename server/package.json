@@ -6,7 +6,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon --watch src app.js"
+    "dev": "nodemon --watch src app.js",
+    "db:sync": "node ./src/db/sync.js"
   },
   "author": "",
   "license": "ISC",
