@@ -1,28 +1,17 @@
 import axios from "axios";
 
-import { LOCAL_STORAGE_KEYS } from "@/constants";
-import authStore from "@store/stores/authStore.js";
+import { API_AUTH_ROUTES, LOCAL_STORAGE_KEYS } from "@/constants";
 import notificationStore from "@store/stores/notificationStore.js";
 
 const $axios = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
   withCredentials: true,
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${localStorage.getItem(
-      LOCAL_STORAGE_KEYS.ACCESS_TOKEN
-    )}`,
-  },
 });
 
 $axios.interceptors.request.use((config) => {
-  const token = localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN);
-
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  } else {
-    config.headers.Authorization = "";
-  }
+  config.headers.Authorization = `Bearer ${localStorage.getItem(
+    LOCAL_STORAGE_KEYS.ACCESS_TOKEN
+  )}`;
 
   return config;
 });
@@ -33,18 +22,29 @@ $axios.interceptors.response.use(
     return response;
   },
   async (error) => {
-    if (error.response.status === 401) {
-      const isRefreshed = await authStore.refresh();
+    const originRequest = error.config;
 
-      if (isRefreshed) {
-        const authHeader = `Bearer ${localStorage.getItem(
-          LOCAL_STORAGE_KEYS.ACCESS_TOKEN
-        )}`;
+    if (
+      error.response.status === 401 &&
+      error.config &&
+      !error.config._isRetry
+    ) {
+      originRequest._isRetry = true;
 
-        $axios.defaults.headers.common["Authorization"] = authHeader;
-        error.config.headers.Authorization = authHeader;
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}${API_AUTH_ROUTES.REFRESH_TOKENS}`,
+          { withCredentials: true }
+        );
 
-        return $axios.request(error.config);
+        localStorage.setItem(
+          LOCAL_STORAGE_KEYS.ACCESS_TOKEN,
+          response.data.accessToken
+        );
+
+        return $axios.request(originRequest);
+      } catch {
+        console.log("User is not authorized");
       }
     }
 

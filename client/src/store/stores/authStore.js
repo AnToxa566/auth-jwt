@@ -49,6 +49,7 @@ class AuthStore {
 
       return true;
     } catch (error) {
+      this.removeUser();
       return null;
     }
   }

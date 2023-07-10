@@ -12,7 +12,7 @@ import LoginPage from "@pages/LoginPage/LoginPage";
 import SingupPage from "@pages/SingupPage/SingupPage";
 
 import { StoreContext } from "@/context/storeContext";
-import { APP_ROTES } from "@/constants";
+import { APP_ROTES, LOCAL_STORAGE_KEYS } from "@/constants";
 
 const App = observer(() => {
   const { authStore, notificationStore } = useContext(StoreContext);
@@ -25,13 +25,15 @@ const App = observer(() => {
       if (!isAuthed) {
         notificationStore.hiddenNotification();
       }
-
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 1000);
     };
 
-    checkAuth();
+    if (localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN)) {
+      checkAuth();
+    }
+
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
   }, [authStore, notificationStore]);
 
   return (
