@@ -48,7 +48,7 @@ const MainPage = () => {
 
         <img
           className="invisible absolute left-[25%] top-[16%] -z-10 lg:visible"
-          src="src/assets/images/bg-sm-image.png"
+          src="/assets/images/bg-sm-image.png"
           alt=""
         />
       </div>

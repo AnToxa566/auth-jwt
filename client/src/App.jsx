@@ -56,7 +56,7 @@ const App = observer(() => {
 
           <img
             className="absolute bottom-0 right-0 -z-10"
-            src="src/assets/images/bg-lg-image.png"
+            src="/assets/images/bg-lg-image.png"
             alt=""
           />
         </div>
