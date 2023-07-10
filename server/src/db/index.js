@@ -15,6 +15,7 @@ export const sequelize = new Sequelize(
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     dialect: "postgres",
+    ssl: process.env.NODE_ENV === "production" ? true : false,
   }
 );
 
